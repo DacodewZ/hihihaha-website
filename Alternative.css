@@ -1,0 +1,257 @@
+/* --- RESET & BASICS --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory; /* Mengunci scroll per section */
+}
+
+body {
+  background-color: #0b0b0b;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* --- GLOBAL SECTION LOCKING --- */
+section {
+  width: 100%;
+  height: 100vh; /* Satu layar penuh */
+  position: relative;
+  scroll-snap-align: start;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- HERO & GRID DECORATION --- */
+.hero-section {
+  padding: 0; /* Nav & Welcome punya padding/margin sendiri */
+}
+
+.grid-section {
+  position: absolute;
+  inset: 0;
+  z-index: -1; 
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 100px 100px;
+  background-position: -1px -1px;
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* --- NAVBAR --- */
+.nav-bar {
+  width: 100%;
+  padding: 28px 32px; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  z-index: 20;
+}
+
+.navlist-left, .navlist-right {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.navlist-left a, .navlist-right a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  z-index: 2; 
+  display: block;
+}
+
+.nav-bar a::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.nav-bar a:hover::before { opacity: 0.3; }
+
+.btn-signup {
+  border: 1.5px solid white;
+  border-radius: 50px; 
+  padding: 8px 16px; 
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-signup:hover { background: white; color: black !important; }
+
+/* --- WELCOME TEXT --- */
+.welcome-text {
+  margin: 32px;
+  flex-grow: 1; /* Mengambil sisa ruang agar h2 terdorong ke bawah */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 64px; /* Jarak h2 dari bawah section */
+}
+
+.main-text {
+  width: 800px;
+  font-size: 96px;
+  line-height: 1; 
+  font-weight: 400;
+  margin-top: 60px;
+}
+
+.sub-text {
+  width: 250px;
+  line-height: 24px;
+  font-weight: 100; /* Tipis karena link Google Font baru */
+  font-size: 20px;
+  margin: 0;
+}
+
+/* --- MASCOT --- */
+.mascot {
+  position: absolute;
+  width: 500px;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  z-index: 5;
+  animation: swayBernard 3s ease-in-out infinite, glowBernard 4s ease-in-out infinite;
+}
+
+@keyframes swayBernard {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(-55%); }
+}
+
+@keyframes glowBernard {
+  0%, 100% { filter: drop-shadow(15px 15px 20px rgba(255, 255, 255, 0.15)); }
+  50% { filter: drop-shadow(20px 20px 40px rgba(255, 255, 255, 0.25)); }
+}
+
+/* --- PERIODIC SECTION --- */
+:root {
+  --element-size: 210px;
+  --element-radius: 24px;
+  --grid-gap: 56px;
+  --symbol-size: 90px;
+  --number-size: 22px;
+  --subname-size: 20px;
+  --heart-size: 400px;
+  --content-max: 700px;
+}
+
+.periodic-section {
+  justify-content: center;
+  align-items: center;
+}
+
+.periodic-heading {
+  font-size: 56px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.periodic-grid {
+  display: grid;
+  grid-template-columns: repeat(5, var(--element-size));
+  gap: var(--grid-gap);
+}
+
+.periodic-element {
+  position: relative;
+  width: var(--element-size);
+  height: var(--element-size);
+  border-radius: var(--element-radius);
+  border: 1px solid white;
+  background: rgba(0,0,0,0.6);
+  transition: 0.35s;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.periodic-element:hover {
+  background: white; color: black;
+  transform: translateY(-10px) scale(1.06);
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 14px rgba(255,255,255,0.1); }
+  50% { box-shadow: 0 0 28px rgba(255,255,255,0.3); }
+}
+
+/* --- ABOUT SECTION --- */
+.about-section {
+  flex-direction: row; /* Teks dan Heart berjajar */
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  padding: 64px;
+}
+
+.about-text {
+  max-width: var(--content-max);
+  text-align: justify;
+}
+
+.about-title { font-size: 56px; margin-bottom: 32px; }
+.about-story { font-size: 24px; font-weight: 200; line-height: 1.6; }
+
+.heart-element {
+  width: var(--heart-size);
+  animation: breatheHeart 4s ease-in-out infinite, glowHeart 4s ease-in-out infinite;
+}
+
+@keyframes breatheHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes glowHeart {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.3)); }
+  50% { filter: drop-shadow(0 0 32px rgba(255, 255, 255, 0.5)); }
+}
+
+/* --- HANGOUT SECTION --- */
+.hangout-section {
+  justify-content: center;
+  align-items: center;
+  padding: 64px;
+}
+
+.hangout-title { font-size: 56px; margin-bottom: 48px; }
+
+.hangout-element {
+  position: relative;
+  width: 80%;
+  height: 200px;
+  border-radius: 28px;
+  margin-bottom: 32px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,0.35);
+  transition: 0.4s;
+}
+
+.hangout-element:hover { transform: scale(1.02); }
+
+.list-section {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.list-title { font-size: 56px; margin-bottom: 32px; }
+.member-list { font-size: 32px; max-width: 700px; line-height: 1.6; }
