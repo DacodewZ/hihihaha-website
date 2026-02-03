@@ -1,2 +1,2 @@
 # hihihaha-website
-A quiet corner on the web for a small circle, where moments, names, and memories are kept alive.
+A digital place to preserve stories, names, and moments of a small circle. Not always together, but once connected.
